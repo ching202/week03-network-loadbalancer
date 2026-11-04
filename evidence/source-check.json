@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "scope": "YAML parsing and static source checks, not Docker Compose schema validation or runtime verification",
+  "checks": [
+    "YAML parses including backend anchors",
+    "two backends only on internal private subnet",
+    "only Nginx publishes a host port and joins both networks",
+    "backend health checks and read-only containers declared",
+    "default subnets do not overlap",
+    "all relative Markdown file links resolve",
+    "assignment instructions and embedded prompt preserved; LMS metadata omitted for public publication"
+  ],
+  "publishedInputSha256": "9f78358d643a73fcb933aa2c8cefb7c80a021f041bc2d37144f056067cc7503c"
+}

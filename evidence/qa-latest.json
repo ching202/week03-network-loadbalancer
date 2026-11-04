@@ -1,0 +1,1999 @@
+{
+  "startedAt": "2026-11-04T00:06:56.615Z",
+  "node": "v24.22.1",
+  "mode": "docker-integration",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "Declared and actual network boundaries; no backend port publication",
+      "status": "PASS",
+      "detail": {
+        "publicName": "week03-network_public_subnet",
+        "privateName": "week03-network_private_subnet",
+        "publicSubnet": [
+          {
+            "Subnet": "172.28.10.0/24",
+            "Gateway": "172.28.10.1"
+          }
+        ],
+        "privateSubnet": [
+          {
+            "Subnet": "172.28.20.0/24",
+            "Gateway": "172.28.20.1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Nginx validates its real container configuration",
+      "status": "PASS",
+      "detail": "nginx -t exited successfully"
+    },
+    {
+      "name": "Gateway liveness and application readiness return 200",
+      "status": "PASS",
+      "detail": {
+        "live": {
+          "ok": true,
+          "status": 200,
+          "body": {
+            "status": "ok",
+            "component": "load-balancer"
+          },
+          "requestId": "284bf40badb102f5c83f361058047ed0",
+          "localPort": 54417,
+          "elapsedMs": 49
+        },
+        "ready": {
+          "ok": true,
+          "status": 200,
+          "body": {
+            "status": "ok",
+            "instanceId": "Backend-1",
+            "hostname": "3dd521bc3ae2"
+          },
+          "instanceId": "Backend-1",
+          "requestId": "844435fa67001bb3da2b842a51adb98e",
+          "backendConnection": "Backend-1:4",
+          "cacheControl": "no-store",
+          "localPort": 54417,
+          "elapsedMs": 14
+        }
+      }
+    },
+    {
+      "name": "10 consecutive requests alternate evenly",
+      "status": "PASS",
+      "detail": {
+        "counts": {
+          "Backend-1": 5,
+          "Backend-2": 5
+        },
+        "rows": [
+          {
+            "phase": "round-robin",
+            "number": 1,
+            "ok": true,
+            "status": 200,
+            "body": {
+              "instanceId": "Backend-2",
+              "hostname": "53168407496b",
+              "timestamp": "2026-11-04T00:07:01.415Z",
+              "requestId": "5a4ec5b37ad9a308a22200b26ada5299"
+            },
+            "instanceId": "Backend-2",
+            "requestId": "5a4ec5b37ad9a308a22200b26ada5299",
+            "backendConnection": "Backend-2:4",
+            "cacheControl": "no-store",
+            "localPort": 54417,
+            "elapsedMs": 9
+          },
+          {
+            "phase": "round-robin",
+            "number": 2,
+            "ok": true,
+            "status": 200,
+            "body": {
+              "instanceId": "Backend-1",
+              "hostname": "3dd521bc3ae2",
+              "timestamp": "2026-11-04T00:07:01.428Z",
+              "requestId": "a405b3bcb363a6989011e1c6fe417867"
+            },
+            "instanceId": "Backend-1",
+            "requestId": "a405b3bcb363a6989011e1c6fe417867",
+            "backendConnection": "Backend-1:4",
+            "cacheControl": "no-store",
+            "localPort": 54417,
+            "elapsedMs": 9
+          },
+          {
+            "phase": "round-robin",
+            "number": 3,
+            "ok": true,
+            "status": 200,
+            "body": {
+              "instanceId": "Backend-2",
+              "hostname": "53168407496b",
+              "timestamp": "2026-11-04T00:07:01.438Z",
+              "requestId": "0a6caa7dfdb2c010678c443d549ea4c4"
+            },
+            "instanceId": "Backend-2",
+            "requestId": "0a6caa7dfdb2c010678c443d549ea4c4",
+            "backendConnection": "Backend-2:4",
+            "cacheControl": "no-store",
+            "localPort": 54417,
+            "elapsedMs": 10
+          },
+          {
+            "phase": "round-robin",
+            "number": 4,
+            "ok": true,
+            "status": 200,
+            "body": {
+              "instanceId": "Backend-1",
+              "hostname": "3dd521bc3ae2",
+              "timestamp": "2026-11-04T00:07:01.444Z",
+              "requestId": "58be1865503854339335f0aee5d97d40"
+            },
+            "instanceId": "Backend-1",
+            "requestId": "58be1865503854339335f0aee5d97d40",
+            "backendConnection": "Backend-1:4",
+            "cacheControl": "no-store",
+            "localPort": 54417,
+            "elapsedMs": 5
+          },
+          {
+            "phase": "round-robin",
+            "number": 5,
+            "ok": true,
+            "status": 200,
+            "body": {
+              "instanceId": "Backend-2",
+              "hostname": "53168407496b",
+              "timestamp": "2026-11-04T00:07:01.452Z",
+              "requestId": "f843ab199e9ae16d1513f0487903616d"
+            },
+            "instanceId": "Backend-2",
+            "requestId": "f843ab199e9ae16d1513f0487903616d",
+            "backendConnection": "Backend-2:4",
+            "cacheControl": "no-store",
+            "localPort": 54417,
+            "elapsedMs": 11
+          },
+          {
+            "phase": "round-robin",
+            "number": 6,
+            "ok": true,
+            "status": 200,
+            "body": {
+              "instanceId": "Backend-1",
+              "hostname": "3dd521bc3ae2",
+              "timestamp": "2026-11-04T00:07:01.463Z",
+              "requestId": "5c8cbe5b4a1f7e817af1121695bcc1f9"
+            },
+            "instanceId": "Backend-1",
+            "requestId": "5c8cbe5b4a1f7e817af1121695bcc1f9",
+            "backendConnection": "Backend-1:4",
+            "cacheControl": "no-store",
+            "localPort": 54417,
+            "elapsedMs": 6
+          },
+          {
+            "phase": "round-robin",
+            "number": 7,
+            "ok": true,
+            "status": 200,
+            "body": {
+              "instanceId": "Backend-2",
+              "hostname": "53168407496b",
+              "timestamp": "2026-11-04T00:07:01.468Z",
+              "requestId": "64f235cdb335d863131e580a7a9ea95e"
+            },
+            "instanceId": "Backend-2",
+            "requestId": "64f235cdb335d863131e580a7a9ea95e",
+            "backendConnection": "Backend-2:4",
+            "cacheControl": "no-store",
+            "localPort": 54417,
+            "elapsedMs": 6
+          },
+          {
+            "phase": "round-robin",
+            "number": 8,
+            "ok": true,
+            "status": 200,
+            "body": {
+              "instanceId": "Backend-1",
+              "hostname": "3dd521bc3ae2",
+              "timestamp": "2026-11-04T00:07:01.476Z",
+              "requestId": "906622e94b4a47acab15fb62e30137ae"
+            },
+            "instanceId": "Backend-1",
+            "requestId": "906622e94b4a47acab15fb62e30137ae",
+            "backendConnection": "Backend-1:4",
+            "cacheControl": "no-store",
+            "localPort": 54417,
+            "elapsedMs": 5
+          },
+          {
+            "phase": "round-robin",
+            "number": 9,
+            "ok": true,
+            "status": 200,
+            "body": {
+              "instanceId": "Backend-2",
+              "hostname": "53168407496b",
+              "timestamp": "2026-11-04T00:07:01.482Z",
+              "requestId": "8cb7e19b39e81ebd5724832149f89016"
+            },
+            "instanceId": "Backend-2",
+            "requestId": "8cb7e19b39e81ebd5724832149f89016",
+            "backendConnection": "Backend-2:4",
+            "cacheControl": "no-store",
+            "localPort": 54417,
+            "elapsedMs": 5
+          },
+          {
+            "phase": "round-robin",
+            "number": 10,
+            "ok": true,
+            "status": 200,
+            "body": {
+              "instanceId": "Backend-1",
+              "hostname": "3dd521bc3ae2",
+              "timestamp": "2026-11-04T00:07:01.489Z",
+              "requestId": "a853f844242f574091028095f7461495"
+            },
+            "instanceId": "Backend-1",
+            "requestId": "a853f844242f574091028095f7461495",
+            "backendConnection": "Backend-1:4",
+            "cacheControl": "no-store",
+            "localPort": 54417,
+            "elapsedMs": 7
+          }
+        ]
+      }
+    },
+    {
+      "name": "Client and upstream HTTP keep-alive reuse; request headers",
+      "status": "PASS",
+      "detail": "One client socket and one upstream socket per backend served the measured sequence"
+    },
+    {
+      "name": "Zero failed requests during forced backend stop",
+      "status": "PASS",
+      "detail": {
+        "requests": 60,
+        "failures": 0
+      }
+    },
+    {
+      "name": "20 requests with backend1 down all reach Backend-2",
+      "status": "PASS",
+      "detail": {
+        "requests": 20,
+        "failures": 0,
+        "survivingBackend": "Backend-2"
+      }
+    },
+    {
+      "name": "Restarted backend automatically rejoins without Nginx restart",
+      "status": "PASS",
+      "detail": {
+        "observedIds": [
+          "Backend-2",
+          "Backend-1"
+        ],
+        "loadBalancerRestarted": false
+      }
+    },
+    {
+      "name": "Host TCP ports 3000, 3001 and 3002 reject direct connections",
+      "status": "PASS",
+      "detail": [
+        {
+          "port": 3000,
+          "result": "ECONNREFUSED"
+        },
+        {
+          "port": 3001,
+          "result": "ECONNREFUSED"
+        },
+        {
+          "port": 3002,
+          "result": "ECONNREFUSED"
+        }
+      ]
+    },
+    {
+      "name": "Public-only client reaches gateway but cannot connect to actual backend IPs",
+      "status": "PASS",
+      "detail": "{\"source\":\"public_subnet\",\"target\":\"172.28.20.2:3000\",\"outcome\":\"timeout\"}\n{\"source\":\"public_subnet\",\"target\":\"172.28.20.3:3000\",\"outcome\":\"timeout\"}"
+    },
+    {
+      "name": "Private-network positive control: backend1 can reach backend2",
+      "status": "PASS",
+      "detail": "{\"status\":\"ok\",\"instanceId\":\"Backend-2\",\"hostname\":\"53168407496b\"}"
+    }
+  ],
+  "requests": [
+    {
+      "phase": "round-robin",
+      "number": 1,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:01.415Z",
+        "requestId": "5a4ec5b37ad9a308a22200b26ada5299"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "5a4ec5b37ad9a308a22200b26ada5299",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 9
+    },
+    {
+      "phase": "round-robin",
+      "number": 2,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-1",
+        "hostname": "3dd521bc3ae2",
+        "timestamp": "2026-11-04T00:07:01.428Z",
+        "requestId": "a405b3bcb363a6989011e1c6fe417867"
+      },
+      "instanceId": "Backend-1",
+      "requestId": "a405b3bcb363a6989011e1c6fe417867",
+      "backendConnection": "Backend-1:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 9
+    },
+    {
+      "phase": "round-robin",
+      "number": 3,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:01.438Z",
+        "requestId": "0a6caa7dfdb2c010678c443d549ea4c4"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "0a6caa7dfdb2c010678c443d549ea4c4",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 10
+    },
+    {
+      "phase": "round-robin",
+      "number": 4,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-1",
+        "hostname": "3dd521bc3ae2",
+        "timestamp": "2026-11-04T00:07:01.444Z",
+        "requestId": "58be1865503854339335f0aee5d97d40"
+      },
+      "instanceId": "Backend-1",
+      "requestId": "58be1865503854339335f0aee5d97d40",
+      "backendConnection": "Backend-1:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 5
+    },
+    {
+      "phase": "round-robin",
+      "number": 5,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:01.452Z",
+        "requestId": "f843ab199e9ae16d1513f0487903616d"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "f843ab199e9ae16d1513f0487903616d",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 11
+    },
+    {
+      "phase": "round-robin",
+      "number": 6,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-1",
+        "hostname": "3dd521bc3ae2",
+        "timestamp": "2026-11-04T00:07:01.463Z",
+        "requestId": "5c8cbe5b4a1f7e817af1121695bcc1f9"
+      },
+      "instanceId": "Backend-1",
+      "requestId": "5c8cbe5b4a1f7e817af1121695bcc1f9",
+      "backendConnection": "Backend-1:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 6
+    },
+    {
+      "phase": "round-robin",
+      "number": 7,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:01.468Z",
+        "requestId": "64f235cdb335d863131e580a7a9ea95e"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "64f235cdb335d863131e580a7a9ea95e",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 6
+    },
+    {
+      "phase": "round-robin",
+      "number": 8,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-1",
+        "hostname": "3dd521bc3ae2",
+        "timestamp": "2026-11-04T00:07:01.476Z",
+        "requestId": "906622e94b4a47acab15fb62e30137ae"
+      },
+      "instanceId": "Backend-1",
+      "requestId": "906622e94b4a47acab15fb62e30137ae",
+      "backendConnection": "Backend-1:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 5
+    },
+    {
+      "phase": "round-robin",
+      "number": 9,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:01.482Z",
+        "requestId": "8cb7e19b39e81ebd5724832149f89016"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "8cb7e19b39e81ebd5724832149f89016",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 5
+    },
+    {
+      "phase": "round-robin",
+      "number": 10,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-1",
+        "hostname": "3dd521bc3ae2",
+        "timestamp": "2026-11-04T00:07:01.489Z",
+        "requestId": "a853f844242f574091028095f7461495"
+      },
+      "instanceId": "Backend-1",
+      "requestId": "a853f844242f574091028095f7461495",
+      "backendConnection": "Backend-1:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 7
+    },
+    {
+      "phase": "during-stop",
+      "number": 11,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:01.499Z",
+        "requestId": "dce8cb48a0f733c31d160602618142d1"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "dce8cb48a0f733c31d160602618142d1",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 8
+    },
+    {
+      "phase": "during-stop",
+      "number": 12,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-1",
+        "hostname": "3dd521bc3ae2",
+        "timestamp": "2026-11-04T00:07:01.579Z",
+        "requestId": "e07348b12fffa3742d7c3e8493623ed1"
+      },
+      "instanceId": "Backend-1",
+      "requestId": "e07348b12fffa3742d7c3e8493623ed1",
+      "backendConnection": "Backend-1:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 12
+    },
+    {
+      "phase": "during-stop",
+      "number": 13,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:01.656Z",
+        "requestId": "57b29a32b67a0047d4a0f5cbd35b7551"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "57b29a32b67a0047d4a0f5cbd35b7551",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 12
+    },
+    {
+      "phase": "during-stop",
+      "number": 14,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-1",
+        "hostname": "3dd521bc3ae2",
+        "timestamp": "2026-11-04T00:07:01.729Z",
+        "requestId": "011d669e6d6e8467c9c6e118959213b9"
+      },
+      "instanceId": "Backend-1",
+      "requestId": "011d669e6d6e8467c9c6e118959213b9",
+      "backendConnection": "Backend-1:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 3
+    },
+    {
+      "phase": "during-stop",
+      "number": 15,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:01.812Z",
+        "requestId": "948c8439d3e5d1e6241b61694b3f5c4f"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "948c8439d3e5d1e6241b61694b3f5c4f",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 7
+    },
+    {
+      "phase": "during-stop",
+      "number": 16,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-1",
+        "hostname": "3dd521bc3ae2",
+        "timestamp": "2026-11-04T00:07:01.892Z",
+        "requestId": "cdac83eab6cbca6dfc2f842e0a245ad0"
+      },
+      "instanceId": "Backend-1",
+      "requestId": "cdac83eab6cbca6dfc2f842e0a245ad0",
+      "backendConnection": "Backend-1:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 8
+    },
+    {
+      "phase": "during-stop",
+      "number": 17,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:01.966Z",
+        "requestId": "489f6184dd9d21789d4bf89e3aba6b72"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "489f6184dd9d21789d4bf89e3aba6b72",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 8
+    },
+    {
+      "phase": "during-stop",
+      "number": 18,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-1",
+        "hostname": "3dd521bc3ae2",
+        "timestamp": "2026-11-04T00:07:02.044Z",
+        "requestId": "e2b3044dc4d6b2ed32bc789b4d3ac877"
+      },
+      "instanceId": "Backend-1",
+      "requestId": "e2b3044dc4d6b2ed32bc789b4d3ac877",
+      "backendConnection": "Backend-1:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 4
+    },
+    {
+      "phase": "during-stop",
+      "number": 19,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:02.124Z",
+        "requestId": "9e06ee7ee2b6f49ea6a14930a1d5df92"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "9e06ee7ee2b6f49ea6a14930a1d5df92",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 7
+    },
+    {
+      "phase": "during-stop",
+      "number": 20,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-1",
+        "hostname": "3dd521bc3ae2",
+        "timestamp": "2026-11-04T00:07:02.201Z",
+        "requestId": "53b6f7fd0c100dca0f07ab93046959fe"
+      },
+      "instanceId": "Backend-1",
+      "requestId": "53b6f7fd0c100dca0f07ab93046959fe",
+      "backendConnection": "Backend-1:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 9
+    },
+    {
+      "phase": "during-stop",
+      "number": 21,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:02.296Z",
+        "requestId": "6b5771e7e6c52907a3a2ccb3605bd15c"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "6b5771e7e6c52907a3a2ccb3605bd15c",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 5
+    },
+    {
+      "phase": "during-stop",
+      "number": 22,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-1",
+        "hostname": "3dd521bc3ae2",
+        "timestamp": "2026-11-04T00:07:02.371Z",
+        "requestId": "0763acb17b85eb4487920af055a310b5"
+      },
+      "instanceId": "Backend-1",
+      "requestId": "0763acb17b85eb4487920af055a310b5",
+      "backendConnection": "Backend-1:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 6
+    },
+    {
+      "phase": "during-stop",
+      "number": 23,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:02.445Z",
+        "requestId": "8b37325d7b1313c44a4af814b9111138"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "8b37325d7b1313c44a4af814b9111138",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 4
+    },
+    {
+      "phase": "during-stop",
+      "number": 24,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-1",
+        "hostname": "3dd521bc3ae2",
+        "timestamp": "2026-11-04T00:07:02.525Z",
+        "requestId": "0f68ae33a51edcf65360d39cc6f14a8b"
+      },
+      "instanceId": "Backend-1",
+      "requestId": "0f68ae33a51edcf65360d39cc6f14a8b",
+      "backendConnection": "Backend-1:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 6
+    },
+    {
+      "phase": "during-stop",
+      "number": 25,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:02.603Z",
+        "requestId": "bfe69c5171d148d75d358d1fd2992c62"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "bfe69c5171d148d75d358d1fd2992c62",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 10
+    },
+    {
+      "phase": "during-stop",
+      "number": 26,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:02.679Z",
+        "requestId": "75ccea3d9243c5965f0d143ea3347f34"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "75ccea3d9243c5965f0d143ea3347f34",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 6
+    },
+    {
+      "phase": "during-stop",
+      "number": 27,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:02.755Z",
+        "requestId": "1a19425029ae8f0d65a32817bf747a25"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "1a19425029ae8f0d65a32817bf747a25",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 3
+    },
+    {
+      "phase": "during-stop",
+      "number": 28,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:02.835Z",
+        "requestId": "622541267fedd6d8ada789ca186e8b76"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "622541267fedd6d8ada789ca186e8b76",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 9
+    },
+    {
+      "phase": "during-stop",
+      "number": 29,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:02.912Z",
+        "requestId": "f9c919c15f7a59b849833adc5a91e18c"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "f9c919c15f7a59b849833adc5a91e18c",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 6
+    },
+    {
+      "phase": "during-stop",
+      "number": 30,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:02.993Z",
+        "requestId": "00dd02d4a0b6023bb4ef1bb57243ec34"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "00dd02d4a0b6023bb4ef1bb57243ec34",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 10
+    },
+    {
+      "phase": "during-stop",
+      "number": 31,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:03.061Z",
+        "requestId": "65188d5dfca5a8b8145d3fa933732b69"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "65188d5dfca5a8b8145d3fa933732b69",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 5
+    },
+    {
+      "phase": "during-stop",
+      "number": 32,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:03.126Z",
+        "requestId": "20f6e129f96532b54b20ec0bca1159c8"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "20f6e129f96532b54b20ec0bca1159c8",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 2
+    },
+    {
+      "phase": "during-stop",
+      "number": 33,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:03.205Z",
+        "requestId": "0a033ff0b47198efe0fccbd0d03df4d4"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "0a033ff0b47198efe0fccbd0d03df4d4",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 8
+    },
+    {
+      "phase": "during-stop",
+      "number": 34,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:03.288Z",
+        "requestId": "62a4c8f823c6d44ffb0a25dcb1980486"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "62a4c8f823c6d44ffb0a25dcb1980486",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 11
+    },
+    {
+      "phase": "during-stop",
+      "number": 35,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:03.360Z",
+        "requestId": "f6df78822ad94ae1ae7e791aba0432f7"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "f6df78822ad94ae1ae7e791aba0432f7",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 3
+    },
+    {
+      "phase": "during-stop",
+      "number": 36,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:03.438Z",
+        "requestId": "6435f8b932b5526b917b99102dc9270c"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "6435f8b932b5526b917b99102dc9270c",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 6
+    },
+    {
+      "phase": "during-stop",
+      "number": 37,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:03.514Z",
+        "requestId": "649fc956ebfea9237bc42b3e6030994c"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "649fc956ebfea9237bc42b3e6030994c",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 4
+    },
+    {
+      "phase": "during-stop",
+      "number": 38,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:03.592Z",
+        "requestId": "654fc6b4b57b1f7b47762b049b2a8df7"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "654fc6b4b57b1f7b47762b049b2a8df7",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 4
+    },
+    {
+      "phase": "during-stop",
+      "number": 39,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:03.670Z",
+        "requestId": "96223a2aff73ccc7204aa987d62b66a9"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "96223a2aff73ccc7204aa987d62b66a9",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 5
+    },
+    {
+      "phase": "during-stop",
+      "number": 40,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:03.745Z",
+        "requestId": "6d62d8b6ca6771de542159a6bb856a7b"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "6d62d8b6ca6771de542159a6bb856a7b",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 3
+    },
+    {
+      "phase": "during-stop",
+      "number": 41,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:03.827Z",
+        "requestId": "0b5df533c39475275b717a761abb0034"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "0b5df533c39475275b717a761abb0034",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 8
+    },
+    {
+      "phase": "during-stop",
+      "number": 42,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:03.898Z",
+        "requestId": "184bd9ceac0d6cb19b7dded069dc0345"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "184bd9ceac0d6cb19b7dded069dc0345",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 5
+    },
+    {
+      "phase": "during-stop",
+      "number": 43,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:03.979Z",
+        "requestId": "994b5324e24e71fc468de996c5b787bf"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "994b5324e24e71fc468de996c5b787bf",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 8
+    },
+    {
+      "phase": "during-stop",
+      "number": 44,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:04.057Z",
+        "requestId": "ff9e0e0a80dccb4f561c3ddb79a37b5b"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "ff9e0e0a80dccb4f561c3ddb79a37b5b",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 10
+    },
+    {
+      "phase": "during-stop",
+      "number": 45,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:04.130Z",
+        "requestId": "7e9f339a6f9a884c6d0ed53e205a30da"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "7e9f339a6f9a884c6d0ed53e205a30da",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 6
+    },
+    {
+      "phase": "during-stop",
+      "number": 46,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:04.213Z",
+        "requestId": "77328c296474a888ae2623b460bba40f"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "77328c296474a888ae2623b460bba40f",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 10
+    },
+    {
+      "phase": "during-stop",
+      "number": 47,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:04.288Z",
+        "requestId": "99c641c9ec56b3c40d29766d26ea380d"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "99c641c9ec56b3c40d29766d26ea380d",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 8
+    },
+    {
+      "phase": "during-stop",
+      "number": 48,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:04.363Z",
+        "requestId": "230599b89070b8023b3959f7abfea49e"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "230599b89070b8023b3959f7abfea49e",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 6
+    },
+    {
+      "phase": "during-stop",
+      "number": 49,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:04.444Z",
+        "requestId": "35e5fe455195f0173de19a8c06f4bcc1"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "35e5fe455195f0173de19a8c06f4bcc1",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 9
+    },
+    {
+      "phase": "during-stop",
+      "number": 50,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:04.521Z",
+        "requestId": "d8e8d756e014aaab7e9aba7a16cc68fe"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "d8e8d756e014aaab7e9aba7a16cc68fe",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 9
+    },
+    {
+      "phase": "during-stop",
+      "number": 51,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:04.597Z",
+        "requestId": "17cd21f152e16efeba60ccfd56b13f5a"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "17cd21f152e16efeba60ccfd56b13f5a",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 7
+    },
+    {
+      "phase": "during-stop",
+      "number": 52,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:04.677Z",
+        "requestId": "6ff7e9b5553c31020a65f87ee62a1435"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "6ff7e9b5553c31020a65f87ee62a1435",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 5
+    },
+    {
+      "phase": "during-stop",
+      "number": 53,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:04.757Z",
+        "requestId": "7e875fdcf4860ecc5d28e9a041be18af"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "7e875fdcf4860ecc5d28e9a041be18af",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 8
+    },
+    {
+      "phase": "during-stop",
+      "number": 54,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:04.831Z",
+        "requestId": "386f329021461d064e265aeeeaf3d4e1"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "386f329021461d064e265aeeeaf3d4e1",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 5
+    },
+    {
+      "phase": "during-stop",
+      "number": 55,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:04.910Z",
+        "requestId": "97acd1c60cf420eb84c8a68cbff637e2"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "97acd1c60cf420eb84c8a68cbff637e2",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 8
+    },
+    {
+      "phase": "during-stop",
+      "number": 56,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:04.988Z",
+        "requestId": "3dfe940f700c88355d8b746d1dbdd325"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "3dfe940f700c88355d8b746d1dbdd325",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 8
+    },
+    {
+      "phase": "during-stop",
+      "number": 57,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:05.070Z",
+        "requestId": "dca984bbd5f67f0b5813f95e5bc898aa"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "dca984bbd5f67f0b5813f95e5bc898aa",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 10
+    },
+    {
+      "phase": "during-stop",
+      "number": 58,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:05.144Z",
+        "requestId": "effac38087b47dccb44ca0aa47ac4bbd"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "effac38087b47dccb44ca0aa47ac4bbd",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 4
+    },
+    {
+      "phase": "during-stop",
+      "number": 59,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:05.225Z",
+        "requestId": "d3ed667895a4e12b8db20c76f69379e9"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "d3ed667895a4e12b8db20c76f69379e9",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 6
+    },
+    {
+      "phase": "during-stop",
+      "number": 60,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:05.303Z",
+        "requestId": "ba8710610a9a6dc29eeb554b6ef20eb2"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "ba8710610a9a6dc29eeb554b6ef20eb2",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 10
+    },
+    {
+      "phase": "during-stop",
+      "number": 61,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:05.377Z",
+        "requestId": "51de6591d820edaf098ec5bc2a15b4a7"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "51de6591d820edaf098ec5bc2a15b4a7",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 3
+    },
+    {
+      "phase": "during-stop",
+      "number": 62,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:05.455Z",
+        "requestId": "7a6e68b31e417e6616f84618258ae8d5"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "7a6e68b31e417e6616f84618258ae8d5",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 8
+    },
+    {
+      "phase": "during-stop",
+      "number": 63,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:05.531Z",
+        "requestId": "348933c7f5895b80e6332d6dbcc11027"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "348933c7f5895b80e6332d6dbcc11027",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 9
+    },
+    {
+      "phase": "during-stop",
+      "number": 64,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:05.609Z",
+        "requestId": "dc9b6e23bab3adfe7df33bc7a01edf7d"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "dc9b6e23bab3adfe7df33bc7a01edf7d",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 7
+    },
+    {
+      "phase": "during-stop",
+      "number": 65,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:05.686Z",
+        "requestId": "1c3b1da59f7e75e5abf53c97b4077437"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "1c3b1da59f7e75e5abf53c97b4077437",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 9
+    },
+    {
+      "phase": "during-stop",
+      "number": 66,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:05.761Z",
+        "requestId": "ab27f835b7c4ec45c817cf1771ffa9a6"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "ab27f835b7c4ec45c817cf1771ffa9a6",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 4
+    },
+    {
+      "phase": "during-stop",
+      "number": 67,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:05.841Z",
+        "requestId": "343bd17d38d702fedf08950882eeaed7"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "343bd17d38d702fedf08950882eeaed7",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 7
+    },
+    {
+      "phase": "during-stop",
+      "number": 68,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:05.919Z",
+        "requestId": "ca0e66f24455bdd9bfd2d09250631f10"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "ca0e66f24455bdd9bfd2d09250631f10",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 8
+    },
+    {
+      "phase": "during-stop",
+      "number": 69,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:05.995Z",
+        "requestId": "bc338550efec2742f9d7f134c01963bf"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "bc338550efec2742f9d7f134c01963bf",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 4
+    },
+    {
+      "phase": "during-stop",
+      "number": 70,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:06.074Z",
+        "requestId": "0de9cd007062ece4fc89f84b3502750f"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "0de9cd007062ece4fc89f84b3502750f",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 10
+    },
+    {
+      "phase": "backend1-down",
+      "number": 71,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:06.425Z",
+        "requestId": "4601fe0ab8b0112d9c27872bb32882e5"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "4601fe0ab8b0112d9c27872bb32882e5",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 8
+    },
+    {
+      "phase": "backend1-down",
+      "number": 72,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.430Z",
+        "requestId": "f6c4b33c6513e2b14c3a16dc1f456bc2"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "f6c4b33c6513e2b14c3a16dc1f456bc2",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 1007
+    },
+    {
+      "phase": "backend1-down",
+      "number": 73,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.439Z",
+        "requestId": "991061a4b594029f9dc5fffa7b56c190"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "991061a4b594029f9dc5fffa7b56c190",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 6
+    },
+    {
+      "phase": "backend1-down",
+      "number": 74,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.445Z",
+        "requestId": "97e612697d9cb88ff172e10517c337b2"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "97e612697d9cb88ff172e10517c337b2",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 5
+    },
+    {
+      "phase": "backend1-down",
+      "number": 75,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.450Z",
+        "requestId": "f22bf281c84b4dbe873bcda984cccec2"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "f22bf281c84b4dbe873bcda984cccec2",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 4
+    },
+    {
+      "phase": "backend1-down",
+      "number": 76,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.459Z",
+        "requestId": "4b26b53042a28dd8c6954297e934abe5"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "4b26b53042a28dd8c6954297e934abe5",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 10
+    },
+    {
+      "phase": "backend1-down",
+      "number": 77,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.465Z",
+        "requestId": "46e7426340b12c94e8e92941409a2a91"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "46e7426340b12c94e8e92941409a2a91",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 3
+    },
+    {
+      "phase": "backend1-down",
+      "number": 78,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.471Z",
+        "requestId": "5718fff50eda13a3980ed6dd4d56699e"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "5718fff50eda13a3980ed6dd4d56699e",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 6
+    },
+    {
+      "phase": "backend1-down",
+      "number": 79,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.475Z",
+        "requestId": "e2d00544730d63c232c26fbbf3f256c2"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "e2d00544730d63c232c26fbbf3f256c2",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 3
+    },
+    {
+      "phase": "backend1-down",
+      "number": 80,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.478Z",
+        "requestId": "53f4cfb68c1c18c37e1705ec996f70e3"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "53f4cfb68c1c18c37e1705ec996f70e3",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 4
+    },
+    {
+      "phase": "backend1-down",
+      "number": 81,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.482Z",
+        "requestId": "74f5f7f41889299fb40eb554f4da3e4c"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "74f5f7f41889299fb40eb554f4da3e4c",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 4
+    },
+    {
+      "phase": "backend1-down",
+      "number": 82,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.491Z",
+        "requestId": "a0cf25063f0f487bcb472937e87d20bd"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "a0cf25063f0f487bcb472937e87d20bd",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 8
+    },
+    {
+      "phase": "backend1-down",
+      "number": 83,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.496Z",
+        "requestId": "d9d1789a993527cc2fa019474da97ccd"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "d9d1789a993527cc2fa019474da97ccd",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 3
+    },
+    {
+      "phase": "backend1-down",
+      "number": 84,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.503Z",
+        "requestId": "c6b40df16bf92ece7dad9fb490d96ed0"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "c6b40df16bf92ece7dad9fb490d96ed0",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 10
+    },
+    {
+      "phase": "backend1-down",
+      "number": 85,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.513Z",
+        "requestId": "54c31b3cfeebfb40ec420e939bf1caae"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "54c31b3cfeebfb40ec420e939bf1caae",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 6
+    },
+    {
+      "phase": "backend1-down",
+      "number": 86,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.517Z",
+        "requestId": "05eea5c381ec66a80ff06b6a3a72de03"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "05eea5c381ec66a80ff06b6a3a72de03",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 7
+    },
+    {
+      "phase": "backend1-down",
+      "number": 87,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.524Z",
+        "requestId": "8423a9570a59319ec55e124b8e476a8d"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "8423a9570a59319ec55e124b8e476a8d",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 3
+    },
+    {
+      "phase": "backend1-down",
+      "number": 88,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.528Z",
+        "requestId": "0e30eb64b2f770b6c10dadc442967617"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "0e30eb64b2f770b6c10dadc442967617",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 4
+    },
+    {
+      "phase": "backend1-down",
+      "number": 89,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.533Z",
+        "requestId": "4b6273ca847cd822a3e5200933136745"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "4b6273ca847cd822a3e5200933136745",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 7
+    },
+    {
+      "phase": "backend1-down",
+      "number": 90,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:07.544Z",
+        "requestId": "02f0299c73a8a62766db4ecd7e818abf"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "02f0299c73a8a62766db4ecd7e818abf",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 7
+    },
+    {
+      "phase": "recovery",
+      "number": 91,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:14.497Z",
+        "requestId": "1c24dc9adb0b6565a1e14e00fded1411"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "1c24dc9adb0b6565a1e14e00fded1411",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 4
+    },
+    {
+      "phase": "recovery",
+      "number": 92,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-2",
+        "hostname": "53168407496b",
+        "timestamp": "2026-11-04T00:07:14.768Z",
+        "requestId": "25baa3da64a00ed2d007578ce4b192de"
+      },
+      "instanceId": "Backend-2",
+      "requestId": "25baa3da64a00ed2d007578ce4b192de",
+      "backendConnection": "Backend-2:4",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 8
+    },
+    {
+      "phase": "recovery",
+      "number": 93,
+      "ok": true,
+      "status": 200,
+      "body": {
+        "instanceId": "Backend-1",
+        "hostname": "3dd521bc3ae2",
+        "timestamp": "2026-11-04T00:07:15.030Z",
+        "requestId": "c9a0cde7d767ef8b80b3667d8902fc0d"
+      },
+      "instanceId": "Backend-1",
+      "requestId": "c9a0cde7d767ef8b80b3667d8902fc0d",
+      "backendConnection": "Backend-1:2",
+      "cacheControl": "no-store",
+      "localPort": 54417,
+      "elapsedMs": 5
+    }
+  ],
+  "manualBrowserChecks": "PENDING: DevTools Console, Network headers, and screen/webcam recording",
+  "baseUrl": "http://127.0.0.1:80",
+  "finishedAt": "2026-11-04T00:07:24.972Z",
+  "totalRequests": 93,
+  "failedRequests": 0
+}

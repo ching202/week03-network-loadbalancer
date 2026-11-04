@@ -1,0 +1,217 @@
+{
+  "name": "week03-network",
+  "networks": {
+    "private_subnet": {
+      "name": "week03-network_private_subnet",
+      "driver": "bridge",
+      "ipam": {
+        "config": [
+          {
+            "subnet": "172.28.20.0/24"
+          }
+        ]
+      },
+      "internal": true
+    },
+    "public_subnet": {
+      "name": "week03-network_public_subnet",
+      "driver": "bridge",
+      "ipam": {
+        "config": [
+          {
+            "subnet": "172.28.10.0/24"
+          }
+        ]
+      }
+    }
+  },
+  "services": {
+    "backend1": {
+      "restart": "unless-stopped",
+      "cap_drop": [
+        "ALL"
+      ],
+      "command": null,
+      "entrypoint": null,
+      "environment": {
+        "INSTANCE_ID": "Backend-1"
+      },
+      "image": "week03-backend:local",
+      "networks": {
+        "private_subnet": null
+      },
+      "read_only": true,
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "tmpfs": [
+        "/tmp"
+      ],
+      "build": {
+        "context": "<PROJECT_ROOT>\\backend",
+        "dockerfile": "Dockerfile"
+      },
+      "expose": [
+        "3000"
+      ],
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+        ],
+        "timeout": "3s",
+        "interval": "5s",
+        "retries": 3,
+        "start_period": "5s"
+      }
+    },
+    "backend2": {
+      "restart": "unless-stopped",
+      "cap_drop": [
+        "ALL"
+      ],
+      "command": null,
+      "entrypoint": null,
+      "environment": {
+        "INSTANCE_ID": "Backend-2"
+      },
+      "image": "week03-backend:local",
+      "networks": {
+        "private_subnet": null
+      },
+      "read_only": true,
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "tmpfs": [
+        "/tmp"
+      ],
+      "build": {
+        "context": "<PROJECT_ROOT>\\backend",
+        "dockerfile": "Dockerfile"
+      },
+      "expose": [
+        "3000"
+      ],
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+        ],
+        "timeout": "3s",
+        "interval": "5s",
+        "retries": 3,
+        "start_period": "5s"
+      }
+    },
+    "load-balancer": {
+      "restart": "unless-stopped",
+      "command": [
+        "-g",
+        "daemon off;"
+      ],
+      "entrypoint": [
+        "nginx"
+      ],
+      "image": "nginx:1.30-alpine",
+      "networks": {
+        "private_subnet": null,
+        "public_subnet": null
+      },
+      "read_only": true,
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "tmpfs": [
+        "/var/cache/nginx",
+        "/var/run",
+        "/tmp"
+      ],
+      "volumes": [
+        {
+          "type": "bind",
+          "source": "<PROJECT_ROOT>\\nginx\\nginx.conf",
+          "target": "/etc/nginx/nginx.conf",
+          "read_only": true,
+          "bind": {}
+        },
+        {
+          "type": "bind",
+          "source": "<PROJECT_ROOT>\\web",
+          "target": "/usr/share/nginx/html",
+          "read_only": true,
+          "bind": {}
+        }
+      ],
+      "depends_on": {
+        "backend1": {
+          "condition": "service_healthy",
+          "required": true
+        },
+        "backend2": {
+          "condition": "service_healthy",
+          "required": true
+        }
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "wget",
+          "-q",
+          "-O",
+          "/dev/null",
+          "http://127.0.0.1/healthz"
+        ],
+        "timeout": "3s",
+        "interval": "5s",
+        "retries": 3
+      },
+      "ports": [
+        {
+          "mode": "ingress",
+          "host_ip": "127.0.0.1",
+          "target": 80,
+          "published": "80",
+          "protocol": "tcp"
+        }
+      ]
+    }
+  },
+  "x-backend": {
+    "build": "./backend",
+    "cap_drop": [
+      "ALL"
+    ],
+    "expose": [
+      "3000"
+    ],
+    "healthcheck": {
+      "interval": "5s",
+      "retries": 3,
+      "start_period": "5s",
+      "test": [
+        "CMD",
+        "node",
+        "-e",
+        "fetch('http://127.0.0.1:3000/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      ],
+      "timeout": "3s"
+    },
+    "image": "week03-backend:local",
+    "networks": [
+      "private_subnet"
+    ],
+    "read_only": true,
+    "restart": "unless-stopped",
+    "security_opt": [
+      "no-new-privileges:true"
+    ],
+    "tmpfs": [
+      "/tmp"
+    ]
+  }
+}

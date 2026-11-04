@@ -1,0 +1,4 @@
+NAME                             IMAGE                  COMMAND                  SERVICE         CREATED          STATUS                    PORTS
+week03-network-backend1-1        week03-backend:local   "docker-entrypoint.s…"   backend1        43 seconds ago   Up 17 seconds (healthy)   3000/tcp
+week03-network-backend2-1        week03-backend:local   "docker-entrypoint.s…"   backend2        43 seconds ago   Up 41 seconds (healthy)   3000/tcp
+week03-network-load-balancer-1   nginx:1.30-alpine      "nginx -g 'daemon of…"   load-balancer   42 seconds ago   Up 35 seconds (healthy)   127.0.0.1:80->80/tcp

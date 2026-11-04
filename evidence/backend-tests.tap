@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: Two actual backend servers return distinct IDs, healthy responses, and no-store
+ok 1 - Two actual backend servers return distinct IDs, healthy responses, and no-store
+  ---
+  duration_ms: 62.8644
+  type: 'test'
+  ...
+# Subtest: Request ID survives the application, and one TCP socket handles two requests
+ok 2 - Request ID survives the application, and one TCP socket handles two requests
+  ---
+  duration_ms: 22.1446
+  type: 'test'
+  ...
+# Subtest: Unsupported writes and unknown paths fail; HEAD has no body
+ok 3 - Unsupported writes and unknown paths fail; HEAD has no body
+  ---
+  duration_ms: 19.7797
+  type: 'test'
+  ...
+# Subtest: QA reports an actual refused connection as a failed request
+ok 4 - QA reports an actual refused connection as a failed request
+  ---
+  duration_ms: 6.8552
+  type: 'test'
+  ...
+# Subtest: QA rejects 502 responses and HTTP 200 with malformed JSON
+ok 5 - QA rejects 502 responses and HTTP 200 with malformed JSON
+  ---
+  duration_ms: 8.833
+  type: 'test'
+  ...
+# Subtest: QA rejects evenly counted but nonalternating traffic and missing measurements
+ok 6 - QA rejects evenly counted but nonalternating traffic and missing measurements
+  ---
+  duration_ms: 2.1678
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 293.6503

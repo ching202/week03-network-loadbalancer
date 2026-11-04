@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-11-04T00:08:29.151Z",
+  "url": "http://127.0.0.1/",
+  "status": "PASS",
+  "scope": "Live browser UI and captured console logs; DevTools Network walkthrough remains for video",
+  "requests": 10,
+  "counts": {
+    "Backend-1": 5,
+    "Backend-2": 5
+  },
+  "failedRequests": 0,
+  "rows": [
+    "#Handled byHostnameHTTPTime",
+    "1Backend-253168407496b20092 ms",
+    "2Backend-13dd521bc3ae220022 ms",
+    "3Backend-253168407496b20021 ms",
+    "4Backend-13dd521bc3ae220019 ms",
+    "5Backend-253168407496b20016 ms",
+    "6Backend-13dd521bc3ae220023 ms",
+    "7Backend-253168407496b20012 ms",
+    "8Backend-13dd521bc3ae220015 ms",
+    "9Backend-253168407496b20037 ms",
+    "10Backend-13dd521bc3ae220025 ms"
+  ],
+  "console": []
+}
