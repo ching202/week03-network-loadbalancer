@@ -1,0 +1,14 @@
+# Preserved AI baseline. Review artifact only; do not deploy this draft.
+events {}
+http {
+    upstream applications {
+        server backend1:3000;
+        server backend2:3000;
+    }
+    server {
+        listen 80;
+        location / {
+            proxy_pass http://applications;
+        }
+    }
+}

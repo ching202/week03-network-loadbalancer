@@ -1,0 +1,175 @@
+Assignment: Multi-Subnet Network Topology & Load Balancer Implementation
+
+[Publication note: LMS grade, attempt, status, due-date, and availability metadata were omitted. The assignment instructions and embedded sample prompt below are unchanged. The original attachment remains local and is not published.]
+
+Objective & Overview
+In modern cloud and enterprise systems, applications are never deployed to flat, unprotected networks. Application architects design isolated network segments (public ingress vs. private application tiers) and use load balancers to distribute traffic, terminate TLS, and prevent single-point-of-failure bottlenecks.
+
+When developers use AI to generate infrastructure configurations (e.g., Docker Compose networks, Terraform, Nginx configs, or cloud VPC templates), LLMs often take dangerous shortcuts—such as binding private backend containers directly to host ports, hallucinating non-existent upstream directives, or creating flat networks where every service can touch the public internet.
+
+In this assignment, you will:
+
+Use an AI tool to generate an initial draft of a multi-subnet network topology with a functional load balancer (e.g., Nginx, HAProxy, Envoy, or cloud ALB/Traefik) distributing traffic across multiple backend web application instances.
+Audit and verify the AI-generated network definitions to enforce subnet isolation (public vs. private tiers) and verify load distribution algorithms (Round-Robin, Least Connections).
+Execute a structured Web Project QA test suite to verify traffic balancing, zero-downtime failover, and network segmentation.
+Deploy and submit your project with a GitHub repository, AI prompt log, live URL (if applicable), and a video walkthrough demonstrating functionality, failover, and networking tests.
+Step-by-Step Instructions
+Step 1: Prompt the AI for an Initial Draft
+Students can implement this using Docker Compose with custom bridge networks (accessible on any local machine) or using Infrastructure as Code / Cloud VPCs (AWS/GCP/Azure with Terraform).
+
+Sample Initial Prompt for Students to Copy & Adapt:
+
+Act as a senior network systems architect. I need a multi-container network topology configured using Docker Compose (or Terraform/Cloud IaC) demonstrating isolated subnets and reverse-proxy load balancing for a web application.
+
+ 
+
+The architecture must include:
+
+Two Isolated Network Subnets:
+   - 'public_subnet': Accessible from the host/internet.
+
+   - 'private_subnet': Isolated backend network with no direct external port exposure.
+
+A Load Balancer (Nginx or HAProxy):
+   - Dual-homed on both 'public_subnet' and 'private_subnet'.
+
+   - Exposes port 80/443 to the host.
+
+   - Configured with an upstream pool distributing requests across backend instances using Round-Robin.
+
+At least Two Web Application Backend Replicas (e.g., Node.js, Python, or Go):
+   - Connected ONLY to 'private_subnet'.
+
+   - Each instance must return a unique identifier (e.g., container hostname or server ID) so I can verify which instance handled the request.
+
+   - Includes a simple health-check endpoint (/healthz).
+
+ 
+
+Provide the Docker Compose file, the load balancer configuration file (e.g., nginx.conf), the minimal backend application code, and step-by-step instructions to run and test it.
+
+ 
+
+Step 2: Audit & Verify the AI Output (Networking & Security Checklist)
+Before running the generated infrastructure, review what the AI produced against this Network Reality Check:
+
+Port Leakage & Network Isolation: Did the AI map the backend instances' ports to the host machine (e.g., ports: ["3001:3000"])?
+Correction: Backend containers must never expose ports directly to the host. They must use expose: or internal container ports visible only within the private_subnet.
+Subnet Dual-Homing: Is the load balancer the only service connected to both the public and private subnets? The backend apps must not have an interface on the public network.
+Upstream Configuration & DNS Resolution: Did the AI hardcode static container IPs, or did it use internal Docker/cloud service discovery names? Did it include connection timeouts and retry buffers (proxy_next_upstream in Nginx)?
+Session Persistence vs. True Balancing: Verify whether the AI generated a round-robin, least-connections, or IP-hash algorithm, and ensure it correctly balances stateless requests across all backends.
+Step 3: Web Project Testing & Quality Assurance (QA) Checklist
+Run your infrastructure through this QA framework. You will demonstrate these live in your recording:
+
+[ ] 1. Load Distribution Verification (Round-Robin Test):
+Send at least 10 consecutive requests (via browser refresh, curl, or Postman).
+Confirm that responses alternate evenly between Backend Instance 1 and Backend Instance 2 based on the returned container hostname/ID.
+[ ] 2. High Availability & Failover Test:
+Stop or kill one backend instance (e.g., docker stop backend_1).
+Issue requests to the load balancer: confirm that 100% of requests are transparently routed to the remaining healthy instance with zero dropped requests (502 Bad Gateway avoided).
+Restart the stopped instance and verify it automatically re-enters the active balancing pool.
+[ ] 3. Network Boundary & Isolation Test (Negative Test):
+Verify from the host machine that direct HTTP connections to internal backend container ports (e.g., curl http://localhost:3001) are rejected or unreachable.
+Prove that the backend can only be reached through the reverse-proxy load balancer on the public gateway.
+[ ] 4. Browser Console & Health Check Status:
+Load balancer health-check endpoint returns HTTP 200 OK.
+Browser DevTools Network tab shows proper HTTP status codes, headers, and clean connection reuse.
+Console is clean with zero client-side or gateway routing errors.
+Video Demonstration Requirements (5 to 7 Minutes)
+Your video must include your screen and webcam/face simultaneously (e.g., recorded via Loom, OBS, Zoom, or Panopto):
+
+0:00 – 1:30 | Network Architecture & AI Verification:
+Show a diagram of your network topology (public subnet, private subnet, dual-homed load balancer, backend instances). Highlight at least one specific configuration flaw or omission you caught in the AI-generated draft (such as exposed backend ports or missing retry blocks).
+1:30 – 3:00 | Live Functionality & Traffic Distribution:
+Launch the environment. Open the browser or terminal and demonstrate requests hitting the load balancer. Show the response payload alternating between server hostnames to prove active load balancing.
+3:00 – 5:00 | QA Checklist & Failover/Isolation Testing:
+Walk through the QA Checklist live:
+Stop one backend node and demonstrate automatic failover without service disruption.
+Attempt a direct curl/browser connection to a backend node from the host to prove subnet isolation.
+Inspect container logs or terminal output to prove the load balancer handled the health check and traffic redirection.
+5:00 – 6:30 | Conclusion & Takeaways:
+Summarize how load balancers act simultaneously as performance accelerators and security perimeters in modern multi-tier application architecture.
+Deliverables & Submission Template
+Paste the following into your LMS submission box:
+
+### Week 03 Hands-On Assignment Submission
+
+* **Live Demo URL:** https://your-lb-deployment.app (or "N/A - Local Docker Topology")
+
+* **GitHub Repository:** https://github.com/your-username/week03-network-loadbalancer
+
+* **Video Demonstration:** https://youtu.be/your-video-id (Unlisted or Public)
+
+ 
+
+#### Video Timestamps:
+
+* 0:00 - Topology Diagram & AI Config Audit
+
+* 1:30 - Live Traffic Distribution (Round-Robin)
+
+* 3:15 - QA Testing: Failover Simulation & Subnet Isolation Check
+
+* 5:15 - Conclusion & Architecture Lessons Learned
+
+ 
+
+GitHub Repository README.md Requirements
+Your repository's README.md must include:
+
+Architecture Topology Diagram & Overview: Clean ASCII or image diagram illustrating the subnets, IP ranges, load balancer, and backend instances.
+Setup & Execution Guide: Exact commands to build, start, stop, and clean up the topology (e.g., docker compose up --build).
+AI Disclosure & Prompt Appendix:
+AI tool(s) used (ChatGPT, Claude, Gemini, etc.).
+The exact prompts submitted.
+A summary of what the AI produced correctly versus what network misconfigurations (port exposure, subnet linking) you had to manually patch.
+QA Test Summary: Completed checklist documenting round-robin distribution, failover handling, and subnet isolation verification.
+Grading Rubric (Total: 100 Points)
+Criteria
+
+Exceptional (Full Points)
+
+Proficient
+
+Needs Revision
+
+Network Segmentation & Topology (25 pts)
+
+Clean multi-subnet separation. Backends are strictly isolated on the private subnet with zero direct external host port exposure; only the load balancer is dual-homed.
+
+Two subnets are defined, but port bindings or isolation rules leave minor security bypasses to the host.
+
+Flat single-network deployment; all containers share the same network and expose ports directly to the host.
+
+Load Balancing & Failover Mechanics (25 pts)
+
+Reverse proxy reliably distributes traffic across healthy instances; failover handles node termination gracefully without dropping user requests.
+
+Load balancing functions, but failover causes dropped requests or long connection timeouts before rerouting.
+
+Load balancer fails to route traffic, routes to only one instance, or crashes when a backend node goes down.
+
+AI Audit & README Documentation (15 pts)
+
+README.md thoroughly documents network setup, includes exact prompts, and provides a clear critique of the AI’s network hallucinations/oversights.
+
+README.md includes setup and prompts, but provides minimal reflection on the AI output or configuration verification.
+
+Missing setup instructions, missing prompt logs, or no disclosure of AI usage.
+
+QA Checklist & Negative Testing (15 pts)
+
+Video clearly demonstrates the full QA checklist live: round-robin distribution, node shutdown failover, and host-level port isolation rejection.
+
+Demonstrates basic load balancing in the video, but skips failover simulation or negative network isolation checks.
+
+Skips live testing demonstration or ignores obvious routing errors on screen.
+
+Video Presentation & Presence (20 pts)
+
+Professional webcam + screen recording; clear audio; active camera eye contact; clean visual pacing landing strictly between 5:00 and 7:00 minutes.
+
+Good delivery, but relies heavily on notes, has minor audio issues, or runs slightly under/over the time limit (by 30–60s).
+
+No webcam/face visible, unintelligible audio, reads script verbatim, or significant timing violations (>2 mins off).
+

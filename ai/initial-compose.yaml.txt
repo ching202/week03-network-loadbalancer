@@ -1,0 +1,30 @@
+# Preserved AI baseline. Review artifact only; do not deploy this draft.
+name: week03-network
+services:
+  load-balancer:
+    image: nginx:1.30-alpine
+    ports: ["127.0.0.1:80:80"]
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks: [public_subnet, private_subnet]
+  backend1:
+    build: ./backend
+    environment:
+      INSTANCE_ID: Backend-1
+    expose: ["3000"]
+    networks: [private_subnet]
+  backend2:
+    build: ./backend
+    environment:
+      INSTANCE_ID: Backend-2
+    expose: ["3000"]
+    networks: [private_subnet]
+networks:
+  public_subnet:
+    driver: bridge
+    ipam:
+      config: [{subnet: 172.28.10.0/24}]
+  private_subnet:
+    driver: bridge
+    ipam:
+      config: [{subnet: 172.28.20.0/24}]
