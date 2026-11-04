@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Subnet Lab | Round-robin routing</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header><span class="eyebrow">WEEK 03 · NETWORK SYSTEMS</span><h1>One gateway.<br>Two private backends.</h1><p>Send requests to watch Nginx distribute traffic across an isolated application tier.</p></header>
+    <section class="topology" aria-label="Network topology">
+      <div class="tier"><span class="tag">PUBLIC SUBNET</span><strong>Host → Nginx :80</strong><small>172.28.10.0/24 · default configuration</small></div>
+      <div class="bridge">↓ <span>Nginx connects to both networks</span> ↓</div>
+      <div class="tier private"><span class="tag">PRIVATE SUBNET · INTERNAL</span><div class="nodes"><strong>Backend-1 :3000</strong><strong>Backend-2 :3000</strong></div><small>172.28.20.0/24 · no published backend ports</small></div>
+    </section>
+    <section class="lab" aria-labelledby="lab-title">
+      <div class="section-title"><h2 id="lab-title">Traffic console</h2><span id="status" role="status" aria-live="polite">Ready to send</span></div>
+      <div class="controls"><button id="one">Send one request</button><button id="ten" class="secondary">Send 10 requests</button><button id="clear" class="text-button">Clear results</button></div>
+      <div class="metrics"><div><span>Backend-1 responses</span><strong id="count1">0</strong></div><div><span>Backend-2 responses</span><strong id="count2">0</strong></div><div><span>Failed requests</span><strong id="errors">0</strong></div></div>
+      <div class="table-wrap"><table><thead><tr><th>#</th><th>Handled by</th><th>Hostname</th><th>HTTP</th><th>Time</th></tr></thead><tbody id="history"><tr id="empty"><td colspan="5">Your request history will appear here.</td></tr></tbody></table></div>
+      <details><summary>Last response payload</summary><pre id="payload">No requests yet.</pre></details>
+      <p class="note">Counts describe this browser session, not current server health. Pause browser activity while running the terminal round-robin test. This page sends no automatic background requests.</p>
+    </section>
+    <footer>Local Docker topology · HTTP demonstration · Gateway liveness: <a href="/healthz">/healthz</a> · Application readiness: <a href="/readyz">/readyz</a></footer>
+  </main>
+</body>
+</html>
